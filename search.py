@@ -1,23 +1,27 @@
 import json 
 
-keys = []
+def searchDict(search_str, outputArr, index):
 
-def searchDict(search_str):
-    output = keys.copy()
-    for k in range(0, len(search_str)):
-        current = search_str[k]
-        for j in keys:
-            if current not in j:
-                if j not in output:
-                    continue
-                output.remove(j)
+    if index >= len(search_str):
+        return outputArr
 
-    return output
+    output_copy = outputArr.copy()
+
+    for j in output_copy:
+        if search_str[index] not in j:
+            outputArr.remove(j)
+
+    if output_copy == outputArr:
+        return outputArr
+
+    index += 1
+    return searchDict(search_str, outputArr, index)
 
 with open('dictionary_compact.json') as dict_file:
     data = json.load(dict_file)
     keys = list(data.keys())
 
     search_str = input('Enter the letters you want to search by: ')
-    print(searchDict(search_str))
+
+    print(searchDict(search_str, keys, 0))
 
