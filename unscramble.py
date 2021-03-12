@@ -1,7 +1,6 @@
 import json
-import timeit
 
-def unscrambleWord(search_str, key_arr, index):
+def unscramble_word(search_str, key_arr, index):
     # Creating a copy to iterate over.
     key_copy = key_arr.copy()
     
@@ -18,11 +17,11 @@ def unscrambleWord(search_str, key_arr, index):
             key_arr.remove(key)
 
     index += 1
-    return unscrambleWord(search_str, key_arr, index)
+    return unscramble_word(search_str, key_arr, index)
 
 with open('dictionary_compact.json') as dict_file:
     data = json.load(dict_file)
     keys = list(data.keys())
 
     search_str = input('Enter the word/letters you want to use: ')
-    print(unscrambleWord(search_str, keys, 0))
+    print(unscramble_word(search_str, keys, 0))
